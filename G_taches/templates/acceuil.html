@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS */
+        /* Import Google font - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: #009579;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px; /* Adjust this value to change the spacing from the top */
+        }
+
+        h2 {
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        /* Style du bouton de déconnexion */
+        button {
+            color: #fff;
+            background-color: #009579; /* Couleur verte */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #006653; /* Changement de couleur au survol */
+        }
+
+        button a {
+            text-decoration: none; /* Suppression du soulignement */
+            color: inherit; /* Couleur héritée pour le lien */
+        }
+    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="{% url 'ajoute' %}" class="a">Ajouter</a></li>
+          <li><a href="{% url 'deconnexion' %}" class="a">logout</a> </li>
+          
+        </ul>
+      </nav>
+    <div class="container home">
+        <h2>Bienvenue dans notre site web qui est à propos de gestion des taches où on doit attribuer des taches à des personnes</h2>
+       </div>
+</body>
+</html>

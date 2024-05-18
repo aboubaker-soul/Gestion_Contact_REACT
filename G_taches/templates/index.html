@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+      <ul>
+        <li><a href="{% url 'ajoute' %}" class="a">Ajouter</a></li>
+        <li><a href="{% url 'deconnexion' %}" class="a">logout</a> </li>
+      </ul>
+    </nav>
+    <div>
+      <div class="div_btn">
+        <button id="reset-button" class="btn active"><span>Tout</span> </button>
+        <button id="filter-button2" class="btn"><span>En attente</span> </button>
+        <button id="filter-button" class="btn"><span>En cours</span> </button>
+        <button id="filter-button1" class="btn"><span>fini</span> </button>
+      </div>
+    </div>
+    <div class="grid">
+      {% if taches %}
+          {% for tache in taches %}
+          <div class="item">
+              <form action="{% url 'modifier_tache' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="item-content">
+                      <span class="titre">Titre</span>
+                      <input class="titre1" type="text" name="titre" value="{{ tache.titre }}">
+                      <span class="statut">Statut</span>
+                      <span class="statut1">
+                          <select name="statut" id="d">
+                              {% if tache.statut == 'En attente' %}
+                              <option value="En attente" selected>En attente</option>
+                              <option value="En cours">En cours</option>
+                              <option value="fini">fini</option>
+                              {% elif tache.statut == 'En cours' %}
+                              <option value="En attente">En attente</option>
+                              <option value="En cours" selected>En cours</option>
+                              <option value="fini">fini</option>
+                              {% elif tache.statut == 'fini' %}
+                              <option value="En attente">En attente</option>
+                              <option value="En cours">En cours</option>
+                              <option value="fini" selected>fini</option>
+                              {% else %}
+                              <option value="En attente">En attente</option>
+                              <option value="En cours">En cours</option>
+                              <option value="fini">fini</option>
+                              {% endif %}
+                          </select>
+                      </span>
+                      <span class="date">Date</span>
+                      <input class="date1" type="date" name="date" value="{{ tache.date|date:'Y-m-d' }}">
+
+                      <input type="hidden" name="tache_id" value="{{ tache.id_taches}}">
+                      <input class="modifier" type="submit" value="Modifier">
+                  </div>
+              </form>
+          </div>
+          {% endfor %}
+      {% else %}
+          
+              <p>Aucune tâche disponible.</p>
+          
+      {% endif %}
+  </div>
+  
+      
+      
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/muuri@0.9.5/dist/muuri.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations.min.js"></script>
+      <script>
+     const btns = document.querySelectorAll('.btn');
+
+btns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    // Ajoute la classe active au bouton cliqué
+    btns.forEach(otherBtn => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove('active');
+      }
+    });
+    btn.classList.toggle('active');
+  });
+});
+
+const statuts = document.querySelectorAll('.statut1 select');
+statuts.forEach(statut =>{
+  statut.addEventListener('input',resizeGrid)
+})
+    
+  
+      var grid = new Muuri('.grid', {
+        dragEnabled: false,
+        dragHandle: '.item-content', // Activer la poignée de glisser-déposer pour déplacer les éléments
+        layout: {
+            fillGaps: true,
+            horizontal: false,
+        },
+        layoutDuration: 400
+    });
+    function resizeGrid() {
+  grid.layout();
+}
+    grid.refreshItems().layout();
+    window.addEventListener('load', resizeGrid);
+
+   
+    
+ 
+var filterButton = document.getElementById('filter-button');
+filterButton.addEventListener('click', function() {
+    var items = grid.getItems();
+    for (var i = 0; i < items.length; i++) {
+        var title1 = items[i].getElement().querySelector('.statut1 select');
+        if(title1){
+          let title=title1.value;
+          if (title.includes('En cours')) {
+            items[i].getElement().setAttribute('data-category', 'en cours');
+        } else {
+            items[i].getElement().setAttribute('data-category', '');
+        }
+    }
+        }
+        
+       
+    
+    grid.filter('[data-category="en cours"]');
+});
+var filterButton2 = document.getElementById('filter-button2');
+filterButton2.addEventListener('click', function() {
+    var items = grid.getItems();
+    for (var i = 0; i < items.length; i++) {
+      var title1 = items[i].getElement().querySelector('.statut1 select');
+        if(title1){
+          let title=title1.value;
+          if (title.includes('En attente')) {
+            items[i].getElement().setAttribute('data-category', 'en cours');
+        } else {
+            items[i].getElement().setAttribute('data-category', '');
+        }
+    }
+    }
+    grid.filter('[data-category="en cours"]');
+});
+
+var filterButton1 = document.getElementById('filter-button1');
+filterButton1.addEventListener('click', function() {
+    var items = grid.getItems();
+    for (var i = 0; i < items.length; i++) {
+      var title1 = items[i].getElement().querySelector('.statut1 select');
+        if(title1){
+          let title=title1.value;
+          if (title.includes('fini')) {
+            items[i].getElement().setAttribute('data-category', 'fini');
+        } else {
+            items[i].getElement().setAttribute('data-category', '');
+        }
+    }
+    }
+    grid.filter('[data-category="fini"]');
+});
+
+var resetButton = document.getElementById('reset-button');
+
+resetButton.addEventListener('click', function() {
+    // Réinitialiser les filtres en affichant tous les éléments dans la grille
+
+    // Réinitialiser les boutons de filtre
+    var filterButtons = document.querySelectorAll('.btn-filter');
+    filterButtons.forEach(function(button) {
+        button.classList.remove('active');
+    });
+
+    // Réinitialiser les éléments filtrés
+    grid.filter('*');
+});
+
+
+
+
+      </script>
+</body>
+</html>

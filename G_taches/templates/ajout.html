@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=*, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="{% url 'liste_taches' %}" class="a">retour</a></li>
+      <li><a href="{% url 'deconnexion' %}" class="a">logout</a> </li>
+    </ul>
+  </nav><form action="{% url 'ajoute' %}" method="post">
+  <div class="cont">
+    {% csrf_token %}
+    <span class="titre">Titre :</span>
+    <span class="titre1"><input type="text" name="titre"></span>
+    <span class="date">Date</span>
+    <span class="date1"><input type="date" name="date"></span>
+    <span class="ajouter"><input type="submit" value="Ajouter"></span>
+  
+  </div>
+
+</form>
+</body>
+</html>

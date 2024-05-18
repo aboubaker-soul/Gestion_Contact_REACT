@@ -1,0 +1,351 @@
+$color_background_default: #F0F0F0;
+$color_background_hover: #fff;
+$color_texte_default: #23114e;
+$color_texte_hover: #131212;
+$color_border_default: #BBBBBB;
+$color_border_hover: #202020;
+$color_border_content: #BBBBBB;
+$color_border_bottom: #151313;
+$color_fill_hover: #b40303;
+
+* {
+  box-sizing: border-box;
+
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0
+}
+
+body {
+  background: #fff;
+  color: black;
+  font-family: kanit, sans-serif
+}
+
+nav {
+  text-transform: uppercase;
+  color: black;
+  display: flex;
+  width: 100%;
+  height: 5rem;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Helvetica;
+  padding: 0 1rem;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0px 3px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  transform: translateX(180%)
+}
+
+nav ul:first-child {
+  gap: 10rem
+}
+
+nav ul:last-child {
+  gap: 16rem
+}
+
+.a {
+  color: black;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  border: black solid 1px;
+  padding: 7px;
+  margin: 2px;
+  transition: 0.25s ease-in-out;
+
+  &:hover {
+    background-color: rgba($color: #E8E8E8, $alpha: 1.0);
+    border-color: #fff;
+  }
+
+}
+
+.div_btn {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+}
+
+.btn {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+
+  text-decoration: none;
+  transition: all 250ms;
+  width: auto;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    transform: translateY(-1px);
+  }
+
+  
+
+}
+
+.active {
+  border-color:red;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  transform: translateY(-1px);
+}
+
+
+
+.grid {
+  position: relative;
+  width: 1200px;
+  top: 70px;
+  left: 2%;
+  gap: 500px;
+}
+
+.item {
+  position: absolute;
+  width: 1220px;
+  height: 100px;
+  line-height: auto;
+  margin: 10px;
+  border: 3px solid #BBBBBB;
+  /* Valeur initiale conservée */
+  border-radius: 10px;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+
+  &.muuri-item-hidden {
+    z-index: 0;
+  }
+
+  &.muuri-item-releasing {
+    z-index: 2;
+  }
+
+  &.muuri-item-dragging {
+    z-index: 3;
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    font-size: 30px;
+    color: $color_texte_default;
+    /* Utilisation de la variable */
+    overflow: hidden;
+    border-radius: 10px;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      color: $color_texte_hover;
+      /* Utilisation de la variable */
+    }
+
+    form {
+      width: 100%;
+      height: 100%;
+    }
+
+    .id {
+      display: none;
+    }
+
+    .titre {
+      position: relative;
+      top: 10%;
+      left: 5%;
+      display: inline-block;
+      height: 35px;
+      width: 150px;
+      grid-row: 1;
+      grid-column: 1;
+      overflow: hidden;
+    }
+
+    .titre1 {
+      position: relative;
+      top: 15%;
+      left: 23%;
+      grid-row: 1;
+      grid-column: 1;
+      width: 400px;
+      height: 37px;
+      text-align: center;
+      font-size: 30px;
+      font-family: "kanit";
+      border: 3px solid $color_border_content;
+      /* Utilisation de la variable */
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .statut {
+      position: relative;
+      top: 10%;
+      left: 25%;
+      display: inline-block;
+      height: 35px;
+      width: 100px;
+      grid-row: 1;
+      grid-column: 2;
+      overflow: hidden;
+    }
+
+    .statut1 {
+      position: relative;
+        top: 15%;
+        left: 50%;
+        grid-row: 1;
+        grid-column: 2;
+      select {
+        
+        width: 160px;
+        height: 37px;
+       
+        text-align: center;
+        font-size: 30px;
+        font-family: "kanit";
+        border: 3px solid $color_border_content;
+        /* Utilisation de la variable */
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+    }
+
+    .date {
+      position: relative;
+      top: 10%;
+      left: 5%;
+      display: inline-block;
+      height: 35px;
+      width: 150px;
+      grid-row: 1;
+      grid-column: 3;
+      overflow: hidden;
+    }
+
+    .date1 {
+      position: relative;
+      top: 15%;
+      left: 25%;
+      grid-row: 1;
+      grid-column: 3;
+      width: 200px;
+      height: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-family: "kanit";
+      border: 3px solid $color_border_content;
+      /* Utilisation de la variable */
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .modifier{
+      position: relative;
+      top: 05%;
+      left: 45%;
+      grid-row: 2;
+      grid-column: 3;
+      width: 200px;
+      height: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-family: "kanit";
+      border: 3px solid $color_border_content;
+      /* Utilisation de la variable */
+      border-radius: 10px;
+      overflow: hidden;
+      transition: 0.2s;
+      &:hover{
+        background-color: #000;
+        color: #fff;
+        border: none;
+      }
+    }
+
+  }
+
+  &:hover {
+    background: #F0F0F0;
+  }
+
+  &.muuri-item-dragging,
+  &.muuri-item-releasing {
+    background: #919191;
+    color: #000;
+  }
+
+  &.active {
+    .item-description {
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+
+.cont{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  height: 300px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.7em;
+  border: solid 3px #000;
+  padding: 10px;
+  
+  .titre1{
+    input{
+      width: 200px;
+      height: 30px;
+      text-align: center;
+      border: 3px solid $color_border_content;
+      border-radius: 10px;
+      margin: 10px;
+    }
+  }
+  .date1{
+    input{
+      width: 200px;
+      height: 30px;
+      text-align: center;
+      border: 3px solid $color_border_content;
+      border-radius: 10px;
+      margin: 10px;
+    }
+  }
+}
