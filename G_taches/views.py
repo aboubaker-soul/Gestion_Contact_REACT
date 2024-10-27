@@ -16,7 +16,6 @@ from functools import wraps
 from django.urls import reverse
 
 
-
 def custom_login_required(view_func):
     @wraps(view_func)
     def wrapper(request, *args, **kwargs):
@@ -26,7 +25,6 @@ def custom_login_required(view_func):
             return redirect(reverse('connexion'))
         return view_func(request, *args, **kwargs)
     return wrapper
-
     
 
 
@@ -35,9 +33,10 @@ def acceuil(request):
     return render(request, 'acceuil.html')
 
 
-
 from datetime import date
 
+
+@custom_login_required
 def Ajoute(request):
     if request.method == 'POST':
         form = TachesForm(request.POST)
@@ -137,8 +136,9 @@ def connexion(request):
         nom = request.POST.get('nom')
         password = request.POST.get('password')
         
-        print("Nom d'utilisateur reçu:", nom)  # Débogage
-        print("Mot de passe reçu:", password)  # Débogage
+        # Débogage
+        print("Nom d'utilisateur reçu:", nom)
+        print("Mot de passe reçu:", password)
         
         # Récupérez l'utilisateur depuis la base de données
         try:
@@ -151,7 +151,8 @@ def connexion(request):
         # Vérifiez si l'utilisateur existe et si le mot de passe est correct
         if utilisateur is not None and check_password(password, utilisateur.password):
             # Connexion de l'utilisateur
-            request.session['utilisateur_id'] = utilisateur.id_utilisateur  # Utilisez id_utilisateur
+            request.session['utilisateur_id'] = utilisateur.id_utilisateur
+            request.session.save()  # Sauvegarder explicitement la session
             return redirect('liste_taches')
         else:
             # Affichage d'un message d'erreur si l'authentification a échoué
@@ -159,7 +160,6 @@ def connexion(request):
     
     # Rendu de la page de connexion
     return render(request, 'connexion.html')
-
 
 
 

@@ -16,10 +16,15 @@
   </nav><form action="{% url 'ajoute' %}" method="post">
   <div class="cont">
     {% csrf_token %}
-    <span class="titre">Titre :</span>
+    <div class="dd">
+      <span class="titre">Titre :</span>
     <span class="titre1"><input type="text" name="titre"></span>
-    <span class="date">Date</span>
-    <span class="date1"><input type="date" name="date"></span>
+    </div>
+    <div class="dd1">
+      <span class="date">Date</span>
+      <span class="date1"><input type="date" name="date"></span>
+    </div>
+    
     <span class="ajouter"><input type="submit" value="Ajouter"></span>
   
   </div>

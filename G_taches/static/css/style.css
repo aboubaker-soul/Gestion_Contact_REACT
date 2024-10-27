@@ -13,6 +13,9 @@ body {
   background: #fff;
   color: black;
   font-family: kanit, sans-serif;
+  opacity: 0;
+  background-color: #12A594;
+  animation: body 4s forwards;
 }
 
 nav {
@@ -25,9 +28,10 @@ nav {
   justify-content: space-between;
   font-family: Helvetica;
   padding: 0 1rem;
+  background-color: #7DE0CB;
   position: relative;
   flex-shrink: 0;
-  box-shadow: 0px 3px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 15px -3px rgba(0, 0, 0, 0.3);
 }
 
 nav ul {
@@ -69,12 +73,12 @@ nav ul:last-child {
 
 .btn {
   position: relative;
-  background-color: #FFFFFF;
+  background-color: rgba(0, 5, 29, 0.4549019608);
   border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   box-sizing: border-box;
-  color: rgba(0, 0, 0, 0.85);
+  color: #fff;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
@@ -101,9 +105,11 @@ nav ul:last-child {
 .grid {
   position: relative;
   width: 1200px;
-  top: 70px;
+  top: 700px;
   left: 2%;
-  gap: 500px;
+  gap: 100px;
+  animation: grid 2s forwards;
+  animation-delay: 1s;
 }
 
 .item {
@@ -112,9 +118,8 @@ nav ul:last-child {
   height: 100px;
   line-height: auto;
   margin: 10px;
-  border: 3px solid #BBBBBB;
+  border-bottom: 1px solid #BBBBBB;
   /* Valeur initiale conservée */
-  border-radius: 10px;
   z-index: 1;
   transition: all 0.3s ease-out;
 }
@@ -135,16 +140,18 @@ nav ul:last-child {
   width: 100%;
   height: 100px;
   font-size: 30px;
-  color: #23114e;
+  color: #000;
   /* Utilisation de la variable */
   overflow: hidden;
-  border-radius: 10px;
   transition: color 0.3s ease-in-out;
   cursor: pointer;
+  transition: ease-in-out 0.2s;
 }
 .item-content:hover {
   color: #131212;
-  /* Utilisation de la variable */
+  transform: translateY(-1px);
+  background-color: #7DE0CB;
+  transition: 0.5s ease-in-out;
 }
 .item-content form {
   width: 100%;
@@ -175,9 +182,8 @@ nav ul:last-child {
   text-align: center;
   font-size: 30px;
   font-family: "kanit";
-  border: 3px solid #BBBBBB;
+  border: 2px solid #BBBBBB;
   /* Utilisation de la variable */
-  border-radius: 10px;
   overflow: hidden;
 }
 .item-content .statut {
@@ -204,9 +210,8 @@ nav ul:last-child {
   text-align: center;
   font-size: 30px;
   font-family: "kanit";
-  border: 3px solid #BBBBBB;
+  border: 2px solid #BBBBBB;
   /* Utilisation de la variable */
-  border-radius: 10px;
   overflow: hidden;
 }
 .item-content .date {
@@ -231,9 +236,8 @@ nav ul:last-child {
   text-align: center;
   font-size: 30px;
   font-family: "kanit";
-  border: 3px solid #BBBBBB;
+  border: 2px solid #BBBBBB;
   /* Utilisation de la variable */
-  border-radius: 10px;
   overflow: hidden;
 }
 .item-content .modifier {
@@ -258,9 +262,6 @@ nav ul:last-child {
   color: #fff;
   border: none;
 }
-.item:hover {
-  background: #F0F0F0;
-}
 .item.muuri-item-dragging, .item.muuri-item-releasing {
   background: #919191;
   color: #000;
@@ -272,37 +273,90 @@ nav ul:last-child {
 
 .cont {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 300px;
+  height: 400px;
   width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-size: 1.7em;
-  border: solid 3px #000;
   padding: 10px;
 }
+.cont .dd {
+  width: 500px;
+  height: 50px;
+  transform: translate(0, 1000px);
+  animation: dd 0.5s forwards;
+  animation-delay: 1.5s;
+}
+.cont .dd1 {
+  position: relative;
+  top: 10%;
+  transform: translate(0, 1000px);
+  animation: dd 0.5s forwards;
+  animation-delay: 1.5s;
+}
+.cont .titre {
+  position: relative;
+}
 .cont .titre1 input {
-  width: 200px;
-  height: 30px;
+  width: 300px;
+  height: 50px;
   text-align: center;
   border: 3px solid #BBBBBB;
   border-radius: 10px;
   margin: 10px;
-  font-size: 1.2em;
+  font-size: 1.3em;
+}
+.cont .date {
+  position: relative;
+  top: 35%;
+}
+.cont .date1 {
+  position: relative;
+  top: 10%;
 }
 .cont .date1 input {
   width: 200px;
-  height: 30px;
+  height: 50px;
   text-align: center;
   border: 3px solid #BBBBBB;
   border-radius: 10px;
   margin: 10px;
-  font-size: 1.2em; 
-}/*# sourceMappingURL=style.css.map */
-.cont .ajouter input{
-  width: 200px;
-  height: 30px;
+  font-size: 1.3em;
 }
+.cont .ajouter {
+  position: relative;
+  top: 15%;
+  left: 10%;
+}
+.cont .ajouter input {
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+@keyframes body {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes grid {
+  0% {
+    top: 700px;
+  }
+  to {
+    top: 70px;
+  }
+}
+@keyframes dd {
+  0% {
+    transform: translateX(1000px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}/*# sourceMappingURL=style.css.map */
